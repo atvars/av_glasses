@@ -3,11 +3,14 @@ html {
 }
 
 body {
-    background: url('/media/main_pic.jpg') no-repeat center center fixed;
-    background-size: cover;
     height: calc(100vh - 164px);
     color: lightgray;
     font-family: 'Julius Sans One', sans-serif;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
 }
 
 /* from Bulma */
@@ -19,6 +22,10 @@ body {
     width: 1.5rem;
 }
 
+.bg-green{
+    background-color: green;
+}
+
 .logo-font {
     text-transform: uppercase;
 }
@@ -27,11 +34,6 @@ body {
     width: fit-content;
 }
 
-.shop-now-button {
-    background: black;
-    color: white;
-    min-width: 250px;
-}
 
 .btn-green {
     background: green;
@@ -44,12 +46,37 @@ body {
 .btn-green:hover,
 .btn-green:active,
 .btn-green:focus {
-    background: green;
+    background: lightgreen;
     color: white;
 }
 
-.text-black {
-    color: #000 !important;
+.text-white {
+    color: white !important;
+}
+
+.text-black{
+    color: black !important;
+}
+
+.text-green{
+    color: green !important;
+}
+
+.basic{
+    font-size: 12px;
+}
+
+.text-gray{
+    color: darkgrey!important;
+}
+
+.benefits{
+    background-color: azure;
+    margin: 10px;
+}
+
+.benefit-header{
+    margin-bottom: 30px;
 }
 
 .border-black {
