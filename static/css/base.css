@@ -22,8 +22,22 @@ body {
     width: 1.5rem;
 }
 
+
+/* backgrounds */
 .bg-green{
     background-color: green;
+}
+
+.bg-biege{
+    background-color: lightgoldenrodyellow;
+}
+
+.bg-lightgreen{
+    background-color: lightgreen;
+}
+
+.navbar-toggler{
+    background-color: white!important;
 }
 
 .logo-font {
@@ -50,6 +64,8 @@ body {
     color: white;
 }
 
+
+/* text colors */
 .text-white {
     color: white !important;
 }
