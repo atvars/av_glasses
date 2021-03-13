@@ -31,8 +31,6 @@
                                 <option value="rating_desc" {% if real_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
                                 <option value="name_asc" {% if creal_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
                                 <option value="name_desc" {% if real_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-                                <option value="category_asc" {% if real_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
-                                <option value="category_desc" {% if real_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
                             </select>
                         </div>
                     </div>
@@ -87,4 +85,41 @@
             </div>
         </div>
     </div>
+    <div class="back-button shadow-sm rounded-0 border border-green">
+        <a class="back-link d-flex h-100">
+            <i class="fas fa-arrow-up text-white mx-auto my-auto"></i>
+        </a>	
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.back-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+    
+    <script type="text/javascript">
+        $('#sort-selector').change(function() {
+            var selector = $(this);
+            var selectedUrl = new URL(window.location);
+
+            var choosenVal = selector.val();
+            if(choosenVal != "reset"){
+                var sort = choosenVal.split("_")[0];
+                var direction = choosenVal.split("_")[1];
+
+                selectedUrl.searchParams.set("sort", sort);
+                selectedUrl.searchParams.set("direction", direction);
+
+                window.location.replace(selectedUrl);
+            } else {
+                selectedUrl.searchParams.delete("sort");
+                selectedUrl.searchParams.delete("direction");
+
+                window.location.replace(selectedUrl);
+            }
+        })
+    </script>
 {% endblock %}
