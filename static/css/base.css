@@ -103,6 +103,14 @@ body {
     border: 1px solid black !important;
 }
 
+.border-green {
+    border: 1px solid green !important;
+}
+
+.border-info {
+    border-color: green!important;
+}
+
 .look {
 	height: 100%;
 	width: 100%;
@@ -112,6 +120,7 @@ body {
 	background: white;
 	z-index: -1;
 }
+
 
 /* -------------------------------- Media Queries */
 
