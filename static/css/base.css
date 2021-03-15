@@ -130,7 +130,9 @@ body {
     background-color: green;
 }
 
-.back-link {
+.back-link,
+.change-link,
+.delete-item {
     cursor: pointer;
 }
 

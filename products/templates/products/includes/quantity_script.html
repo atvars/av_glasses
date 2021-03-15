@@ -42,3 +42,24 @@
        handleEnableDisable(itemId);
     });
 </script>
+
+<script type="text/javascript">
+    // Change quantity on click
+    $('.change-link').click(function(e) {
+        var form = $(this).prev('.change-form');
+        form.submit();
+    })
+
+    // Delete item and reload on click
+    $('.delete-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('delete_')[1];
+        var url = `/cart/delete/${itemId}`;
+        var data = {'csrfmiddlewaretoken': csrfToken, 'size': size};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>
