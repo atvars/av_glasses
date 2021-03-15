@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cart_tools %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -45,7 +46,7 @@
                                         <p class="my-0">£{{ item.product.price }}</p>
                                     </td>
                                     <td class="py-3 w-25">
-                                         <form class="form update-form" method="POST" action="">
+                                         <form class="form change-form" method="POST" action="{% url 'adjust_cart' item.item_id %}">
                                             {% csrf_token %}
                                             <div class="form-group">
                                                 <div class="input-group">
@@ -63,7 +64,7 @@
                                                         id="id_quantity_{{ item.item_id }}">
                                                     <div class="input-group-append">
                                                         <button class="increment-quantity btn btn-sm btn-green rounded-0"
-                                                            data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                            data-item_id="{{ item.item_id }}" id="increment-quantity_{{ item.item_id }}">
                                                             <span>
                                                                 <i class="fas fa-plus fa-sm text-white"></i>
                                                             </span>
@@ -77,7 +78,7 @@
                                             id="delete_{{ item.item_id }}"><small>Delete</small></a>
                                     </td>
                                     <td class="py-3">
-                                        <p class="my-0">£{{ item.product.price }}</p>
+                                        <p class="my-0">£{{ item.product.price  | calc_total:item.quantity  }}</p>
                                     </td>
                                 </tr>
                             {% endfor %}

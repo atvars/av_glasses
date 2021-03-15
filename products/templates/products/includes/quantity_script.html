@@ -54,7 +54,8 @@
     $('.delete-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
         var itemId = $(this).attr('id').split('delete_')[1];
-        var url = `/cart/delete/${itemId}`;
+        var size = $(this).data('size');
+        var url = `/cart/delete/${itemId}/`;
         var data = {'csrfmiddlewaretoken': csrfToken, 'size': size};
 
         $.post(url, data)
