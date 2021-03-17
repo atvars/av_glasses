@@ -5,9 +5,9 @@
     https://stripe.com/docs/stripe-js
 */
 
-var stripe_publishable_key = $('#id_stripe_publishable_key').text().slice(1, -1);
-var stripe_client_secret = $('#id_stripe_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripe_publishable_key);
+var stripePublishableKey = $('#id_stripe_publishable_key').text().slice(1, -1);
+var stripeClientSecret = $('#id_stripe_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublishableKey);
 var elements = stripe.elements();
 var style = {
     base: {
@@ -50,7 +50,7 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-    stripe.confirmCardPayment(clientSecret, {
+    stripe.confirmCardPayment(stripeClientSecret, {
         payment_method: {
             card: card,
         }
