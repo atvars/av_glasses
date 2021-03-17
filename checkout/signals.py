@@ -13,7 +13,7 @@ def edit_on_save(sender, instance, created, **kwargs):
 
 
 @receiver(post_delete, sender=OrderLineItem)
-def edit_on_save(sender, instance, **kwargs):
+def edit_on_delete(sender, instance, **kwargs):
     """
     Edit and save order total on lineitem delete
     """

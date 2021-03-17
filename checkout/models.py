@@ -34,7 +34,7 @@ class Order(models.Model):
         Edit total each time a line item is added,
         accounting for delivery price.
         """
-        self.total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
+        self.total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         if self.total < settings.FREE_DELIVERY_POINT:
             self.delivery_price = self.total * settings.STANDARD_DELIVERY / 100
         else:
@@ -52,7 +52,7 @@ class Order(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.order_number
+        return self.order_code
 
 
 class OrderLineItem(models.Model):
