@@ -6,7 +6,7 @@
 */
 
 var stripePublishableKey = $('#id_stripe_publishable_key').text().slice(1, -1);
-var stripeClientSecret = $('#id_stripe_client_secret').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublishableKey);
 var elements = stripe.elements();
 var style = {
@@ -25,11 +25,11 @@ var style = {
     }
 };
 var card = elements.create('card', {style: style});
-card.mount('#card-field');
+card.mount('#card-element');
 
-// Deal validation errors on the card element
+// Handle realtime validation errors on the card element
 card.addEventListener('change', function (event) {
-    var errorDiv = document.getElementById('card_incorect');
+    var errorDiv = document.getElementById('card-errors');
     if (event.error) {
         var html = `
             <span class="icon" role="alert">
@@ -43,20 +43,20 @@ card.addEventListener('change', function (event) {
     }
 });
 
-// Deal with form submit
+// Handle form submit
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-    stripe.confirmCardPayment(stripeClientSecret, {
+    stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
         }
     }).then(function(result) {
         if (result.error) {
-            var errorDiv = document.getElementById('card_incorect');
+            var errorDiv = document.getElementById('card-errors');
             var html = `
                 <span class="icon" role="alert">
                 <i class="fas fa-times"></i>
