@@ -133,3 +133,10 @@
         </div>
     </div>
 {% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_publishable_key|json_script:"id_stripe_publishable_key" }}
+    {{ stripe_client_secret|json_script:"id_stripe_client_secret" }}
+    <script src="{% static 'checkout/js/stripe.js' %}"></script>
+{% endblock %}
