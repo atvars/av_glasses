@@ -54,6 +54,10 @@ body {
     color: white;
 }
 
+input[name='q']::placeholder {
+    color: #aab7c4;
+}
+
 .shop-now-button:hover,
 .shop-now-button:active,
 .shop-now-button:focus,
@@ -220,6 +224,61 @@ body {
   .container {
     max-width: 80%;
   }
+}
+
+/* Allauth form formatting */
+
+.allauth-form-mystyle-content p {
+    margin-top: 1.5rem; /* mt-4 */
+    color: #6c757d; /* text-secondary */
+}
+
+.allauth-form-mystyle-content input {
+    border-color: green;
+    border-radius: 0;
+}
+
+.allauth-form-mystyle-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-mystyle-content input::placeholder {
+    color: #aab7c4;
+}
+
+.allauth-form-mystyle-content button,
+.allauth-form-mystyle-content input[type='submit'] {
+	/* btn */
+	display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: green;
+    border: 1px solid green;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0;
+
+
+    /* standard bootstrap btn transitions */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.allauth-form-mystyle-content button:hover,
+.allauth-form-mystyle-content input[type='submit']:hover {	
+	color: lightgreen;
+    background-color: lightgreen;
+    border-color: lightgreen;
+}
+
+.allauth-form-mystyle-content a {
+	color: green; /* text-info */
 }
 
 /* fixed top navbar only on medium and up */
