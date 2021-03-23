@@ -26,7 +26,7 @@ class UserProfile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_and_update_user_profile(sender, instance, created, **kwargs):
+def create_and_edit_user_profile(sender, instance, created, **kwargs):
     """
     Create and update the user profile
     """
