@@ -99,10 +99,10 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your product edited successfuly!')
+            messages.success(request, 'Your Product was Edited successfully!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to edit product. Please check the form and try again.')
+            messages.error(request, 'Failed to update product. Please check the form and try again.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
@@ -114,3 +114,11 @@ def edit_product(request, product_id):
     }
 
     return render(request, template, context)
+
+
+def delete_product(request, product_id):
+    """ Delete product from the AV Glasses store """
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, 'Product successfuly deleted!')
+    return redirect(reverse('products'))
