@@ -72,8 +72,18 @@ def product_detail(request, product_id):
 
 
 def add_new_product(request):
-    """ Add a new product to AV Glasses store """
-    form = ProductForm()
+    """ Add new product to AV Glasses store """
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product added successfuly')
+            return redirect(reverse('add_new_product'))
+        else:
+            messages.error(request, 'Sorry we could not add new product. Please Check form and try again')
+    else:
+        form = ProductForm()
+
     template = 'products/add_new_product.html'
     context = {
         'form': form,
