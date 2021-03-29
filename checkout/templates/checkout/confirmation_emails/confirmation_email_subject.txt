@@ -1,0 +1,2 @@
+
+AV Glasses Confirmation for Order Number {{ order.order_code }}

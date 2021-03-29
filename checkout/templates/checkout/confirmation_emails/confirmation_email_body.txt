@@ -1,0 +1,22 @@
+Hello {{ order.full_name }}!
+
+This is your confirmation of your recent order at AV Glasses. See below your purches information:
+
+Order Number: {{ order.order_code }}
+Order Date: {{ order.date }}
+
+Order Total: £{{ order.total }}
+Delivery: £{{ order.delivery_price }}
+Grand Total: £{{ order.grand_total }}
+
+Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+
+Phone number  we got is {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank for your order!
+
+Sincerely,
+
+AV Glasses
