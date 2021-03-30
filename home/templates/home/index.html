@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-{% endblock %}
 
 {% block content %}
     <div class="container header-container">
@@ -24,38 +22,38 @@
                     5 Benefits of Buying Computer Glasses
                 </h4>
                 <div class="row justify-content-center text-center">
-                <div class="col-sm-12  col-md-3 col-lg-2 benefits">
+                <div class="col-sm-12 col-md-3 col-lg-2 benefits">
                     <h5 class="text-green">
-                        <strong>Computer Glasses Benefit #1 - MINIMUM GLARE</strong>
+                        <strong class="name">Computer Glasses Benefit #1 - MINIMUM GLARE</strong>
                     </h5>
-                    <p class="text-black basic">
+                    <p class="text-black hover basic hover">
                         Light bouncing off the glass of your digital screen results in creating a glaring obstacle to proper vision. This computer screen glare increases the difference between the dark and lighter areas displayed. This, in turn, often causes our pupils to struggle to keep up to the light by dilating continuously,  until eventually our eyes protest. That’s where Computer glasses come in. These special glasses feature an Anti-glare coating, designed in a way to keep the fatiguing screen glare at a minimum.
                     </p>
                 </div>
 
                  <div class="col-sm-12  col-md-3 col-lg-2 benefits">
                     <h5 class="text-green">
-                        <strong>Computer Glasses Benefit #2 - GOOD POSTURE</strong>
+                        <strong class="name">Computer Glasses Benefit #2 - GOOD POSTURE</strong>
                     </h5>
-                    <p class="text-black basic">
+                    <p class="text-black hover basic">
                         Many a times, we peer over our glasses or hunch closer to the device to get a better view of the computer screens. But we all know this isn’t helping. Computer glasses help you get a clearer vision from a normal distance that ultimately reduces the need to strain on your back and neck. This can also reduce the headaches you get when you strain your eyes way too much and also with a bad posture.
                     </p>
                 </div>
 
                  <div class="col-sm-12  col-md-3 col-lg-2 benefits">
                     <h5 class="text-green">
-                        <strong>Computer Glasses Benefit #3 - BLUE-LIGHT FILTER</strong>
+                        <strong class="name">Computer Glasses Benefit #3 - BLUE-LIGHT FILTER</strong>
                     </h5>
-                    <p class="text-black basic">
+                    <p class="text-black hover basic">
                        Exposure to the harmful Blue Violet radiations emitted by the Computer screens may cause problems like eye strain, sleep cycle disruption and even macular degeneration in some cases. You can also opt for Computer protection glasses with yellow tinted lenses that increase the contrast and help in protecting your eyes from harsh lights of the computer screen.
                     </p>
                 </div>
 
                  <div class="col-sm-12  col-md-3 col-lg-2 benefits">
                     <h5 class="text-green">
-                        <strong>Computer Glasses Benefit #4 - BETTER EYE FOCUS</strong>
+                        <strong class="name">Computer Glasses Benefit #4 - BETTER EYE FOCUS</strong>
                     </h5>
-                    <p class="text-black basic">
+                    <p class="text-black hover basic">
                        Computer glasses usually correct astigmatism – a type of refractive error that causes blurry vision. Drop by the Coco Leni Optical store near you to consult an optometrist and get the best advice possible for the same. We take precise measurements for your lenses that ensures that the optical center of each lens lays in front of your pupils when you use it. These lenses has the power to relax the amount of accommodation required to keep objects in focus and provides the largest field of view.
 
                     </p>
@@ -63,9 +61,9 @@
 
                  <div class="col-sm-12 col-md-3 col-lg-2 benefits">
                     <h5 class="text-green">
-                        <strong>Computer Glasses Benefit #5 - REDUCE CVS SYMPTOMS</strong>
+                        <strong class="name">Computer Glasses Benefit #5 - REDUCE CVS SYMPTOMS</strong>
                     </h5>
-                    <p class="text-black basic">
+                    <p class="text-black hover basic">
                        A study found out that employees working with computers, with no visual complaints, often experience reduced productivity and accuracy. To help reduce the effects of CVS, it is advisable for you to invest in a pair of protective eyeglasses that offer you comfort as well as ensure good eye health. Symptoms like red eyes, disrupted sleep, dry eyes etc associated with CVS tend to reduce with the use of good quality computer glasses.
 
                     </p>
@@ -92,9 +90,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="row  main-footer">
+                    <div class="col s12 bg-green white-text">
+                        <p class="copyright text-center text-white">Copyright &copy; AV Glasses <span id="copyright"></span></p>
+                        <p class="text-white text-center">This website is for learning purpposes only</p>
+                    </div>
                 </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
 
 {% block postloadjs %}
@@ -102,34 +109,6 @@
 
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB40XQRWD7wFtLv4b_3FJOf61iloIT3Z2g&callback=initMap"></script>
-    <script>
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: {
-                    lat: 52.976849,
-                    lng: -0.034810
-                }
-            });
-            var labels = "ABCDEFGHIJKLMONPQRSTUVWXYZ";
 
-            var locations = [{
-                lat: 52.976849,
-                lng: -0.034810
-            }];
-
-            var markers = locations.map(function(location, i) {
-                return new google.maps.Marker ({
-                    position: location,
-                    label: labels[i % labels.length]
-                });
-            });
-
-            var markerCluster = new MarkerClusterer(map, markers, {
-                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-            });
-        }
-    </script>
-    
 {% endblock %}
 
