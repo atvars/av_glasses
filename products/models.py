@@ -31,6 +31,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_rating(self):
+        total = sum(int(review['stars']) for review in self.reviews.values())
+
+        return total / self.reviews.count()
+
 
 class ProductReview(models.Model):
     product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
