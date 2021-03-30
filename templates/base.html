@@ -143,12 +143,25 @@
     {% block content %}
     {% endblock %}
 
+        <div class="row fixed-bottom main-footer">
+            <div class="col s12 bg-green white-text">
+                <p class="copyright text-center text-white">Copyright &copy; AV Glasses <span id="copyright"></span></p>
+                <p class="text-white text-center">This website is for learning purpposes only</p>
+            </div>
+        </div>
+    
+
+    <script type="text/javascript">
+        $("#copyright").text(new Date().getFullYear());
+    </script>
+
     {% block postloadjs %}
         <script type="text/javascript">
             $('.toast').toast('show');
         </script>
     {% endblock %}
 
-    
+        
+
   </body>
 </html>

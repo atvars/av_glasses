@@ -78,7 +78,58 @@
                         <a href="{% url 'products' %}" class="shop-now-button btn-green btn btn-lg rounded-0 text-uppercase my-1">Shop Now</a>
                     </h4>
                 </div>
-            </div>
+            
+
+                <div class="container my-5 maps">
+                    <div class="row">
+                        <div class="col my-5 text-center mt-3">
+                            <h2 class="text-gray my-5">Find Us</h2>
+                            <hr class="w-50 mb-1 my-5">
+                            <div><p class="text-green">Our Main Office:</p> <p class="text-black">36 Albert Terrace, Boston, PE21 8EN </p></div>
+                            <div><p class="text-green">Contact No:</p> <p class="text-black">+447177717171</p></div>
+                            <div><p class="text-green">Email:</p> <p class="text-black">avglasses@email.com</p></div>
+                            <div class="col s12" id="map"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </div>
     </div>
 {% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB40XQRWD7wFtLv4b_3FJOf61iloIT3Z2g&callback=initMap"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: {
+                    lat: 52.976849,
+                    lng: -0.034810
+                }
+            });
+            var labels = "ABCDEFGHIJKLMONPQRSTUVWXYZ";
+
+            var locations = [{
+                lat: 52.976849,
+                lng: -0.034810
+            }];
+
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker ({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+            });
+
+            var markerCluster = new MarkerClusterer(map, markers, {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
+        }
+    </script>
+    
+{% endblock %}
+
