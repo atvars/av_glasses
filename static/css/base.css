@@ -17,6 +17,10 @@ body {
   height: auto;
 }
 
+.space-below{
+    margin-bottom: 20px;
+}
+
 /* from Bulma */
 .icon {
     align-items: center;

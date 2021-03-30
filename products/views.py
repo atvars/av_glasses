@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.auth.models import User
 from django.db.models.functions import Lower
-from .models import Product, Category
+from .models import Product, Category, ProductReview
 from .forms import ProductForm
 
 # Create your views here.
@@ -61,6 +62,15 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        stars = request.POST.get('stars', 3)
+        content = request.POST.get('content', '')
+
+        review = ProductReview.objects.create(product=product, user=request.user, stars=stars, content=content)
+
+        return redirect('product_detail', pk=product_id)
+
     """ A view to show one product details """
 
     product = get_object_or_404(Product, pk=product_id)
@@ -70,6 +80,8 @@ def product_detail(request, product_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
 
 
 @login_required
@@ -107,7 +119,6 @@ def edit_product(request, product_id):
         messages.error(request, 'Sorry, only store owners can accsess this feature.')
         return redirect(reverse('home'))
 
-
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -137,7 +148,6 @@ def delete_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can accsess this feature.')
         return redirect(reverse('home'))
-
 
     product = get_object_or_404(Product, pk=product_id)
     product.delete()

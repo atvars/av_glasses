@@ -85,6 +85,73 @@
                                 </div>
                             </div>
 
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col my-5 mt-3">
+                                        <h4 class="text-green">Product Reviews</h4>
+                                     </div>
+                                </div>
+                            </div>
+
+
+                            <div class="reviews-wrapper">
+                            {% for review in product.reviews.all %}
+                                <div class="text-black bg-lightgreen space-below">
+                                    <p class=" col text-green"><strong>Date: </strong> {{ review.date_added|date:"Y-m-d" }},
+                                        <strong class="text-green col">Stars: </strong>{{ review.stars }}
+                                    </p>
+                                <p class="text-black col">{{ review.content }}</p>
+                                </div>
+                                {% empty %}
+                                <div class="text-red col space-below">No reviews yet!</div><br>
+                            {% endfor %}
+                                <div class="space-below">
+                            {% if request.user.is_authenticated %}
+                                <form method="post" action=".">
+                                {% csrf_token %}
+
+                                <div class="field col">
+                                    <label class="text-green">Stars</label>
+                                    <div clas="control">
+                                        <div class="select">
+                                            <select class="border-green" name="stars">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3" selected>3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field col">
+                                    <label class="text-green">Content</label>
+                                        <div class="control">
+                                            <textarea class="border-green textarea" name="content"></textarea>
+                                        </div>
+                                </div>
+                                
+                                <div class="field col">
+                                    <div class="control">
+                                        <button class="btn-sm btn-green rounded-0 text-uppercase">Submit</button>
+                                    </div>
+                                </div>
+                        </form>
+                        {% else %}
+                            <p class="text-black col">Please sign in to add review!</p>
+                        {% endif %}
+                </div>
+            </div>
+
+
+
+
+
+
+                            
+
                             <div class="col-12">
                                 <a href="{% url 'products' %}" class="btn btn-green rounded-0 mt-5">
                                     <span class="icon">
