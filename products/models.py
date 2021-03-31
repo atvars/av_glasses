@@ -32,9 +32,12 @@ class Product(models.Model):
         return self.name
 
     def get_rating(self):
-        total = sum(int(review['stars']) for review in self.reviews.values())
+        try:
+            total = sum(int(review['stars']) for review in self.reviews.values())
+            return total / self.reviews.count()
+        except ZeroDivisionError:
+            return total
 
-        return total / self.reviews.count()
 
 # thanks for video walk thru https://www.youtube.com/watch?v=Y5vvGQyHtpM
 
