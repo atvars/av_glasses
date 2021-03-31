@@ -372,10 +372,14 @@ div#map {
 
 @media (max-width: 991px) {
     .header-container {
-        padding-top: 183px;
+        padding-top: 90px;
     }
 
     body {
         height: calc(100vh - 116px);
     }
-}
+    h1.logo-text{
+        font-size:10px!important;
+        margin-top:10px!important;
+    }
+} 
