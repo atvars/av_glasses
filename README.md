@@ -1,6 +1,6 @@
 # AV Glasses
 
-Link to [Deployed Site](your link here)
+Link to [Deployed Site](https://av-glasses.herokuapp.com/)
 
 Blue light glasses is new modern world is best feature for adults and kids, who spend lot of time infornt of any screans.
 - Blue light glasses protects from eyes getting dry.
@@ -8,7 +8,7 @@ Blue light glasses is new modern world is best feature for adults and kids, who 
 - Blue light glasses helps your sleep.
 - Blue light glasses protects from fatigueness.
 
-[AV Glasses](live site here) is an online blue light protection glasses shop, which offers not only the glasses, but also case for their new or existing pair of galasses and wipes to clean a lence.
+[AV Glasses](https://av-glasses.herokuapp.com/) is an online blue light protection glasses shop, which offers not only the glasses, but also case for their new or existing pair of galasses and wipes to clean a lence.
 
 ## Table of Contents
 
