@@ -37,6 +37,10 @@ class Product(models.Model):
             return total / self.reviews.count()
         except ZeroDivisionError:
             return total
+<<<<<<< HEAD
+=======
+
+>>>>>>> 62cd762561d391eafee1fd5195b362ca79d06a15
 
 # thanks for video walk thru https://www.youtube.com/watch?v=Y5vvGQyHtpM
 
