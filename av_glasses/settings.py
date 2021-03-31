@@ -23,7 +23,7 @@ SECRET_KEY = 'vfzbt@=jp4sqls&f_#g7t&3z_%%cj(*g9e!^_w3l)$nz4m0z&5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['av-glasses.herokuapp.com', 'localhost']
 
 
 # Application definition
