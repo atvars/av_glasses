@@ -283,18 +283,122 @@ To keep the customers informed with the status of their purchase, it would be ni
 4. Tried my website in diferent web browsers all worked very good. Checked all screan sizes on my smart tv, on my laptom, on my tablet and on my phone all works.
 5. On console in dev tools shows no errors.
 
-
-
-
-
-
 # Deployment
+## Heroku Deployment with AWS
+This website is deployed on [Heroku](https://www.heroku.com/), following these steps:
+1. Install these packages to your local environment, since these packages are required to deploy a Django project on Heroku.
+- [gnicorn](https://gunicorn.org/): `gnicorn` is Python WSGI(web server gataway interface) server for UNIX.
+- [gninx](https://www.nginx.com/): `gninx` is a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server.
+- [psycopg2-binary](https://pypi.org/project/psycopg2-binary/): `psycopg2-binary` is PostgreSQL database adapter for the Python programming language.
+- [dj-database-url](https://pypi.org/project/dj-database-url/): `dj-database-url` allows you to utilize the 12factor inspired DATABASE_URL environment variable to configure your Django application.
+2. Create a `requirements.txt` file and freeze all the modules with the command `pip3 freeze > requirements.txt` in the terminal.
+3. Create a `Procfile` write `web: gunicorn av-glasses.wsgi:application` in the file.
+4. `git add` and `git commit` and `git push` all the changes to the Github repositoty of this project.
+5. Go to Heroku and create a **new app**. Set a name for this app and select the closest region (Europe) and click **Create app**.
+6. Go to **Resources** tab in Heroku, then in the **Add-ons** search bar look for **Heorku Postgres**(you can type postgres), select **Hobby Dev — Free** and click **Submit Order Form** button to add it to your project.
+7. In the heroku dashboard for the application, click on **Setting** > **Reveal Config Vars** and set the values as follows:
+
+* I used [Djecrety](https://djecrety.ir/) to generate Django Secret Key.
+
+8. Comment out the current database setting in settings.py, and add the code below instead. This is done temporarily to migrate the datbase on Heroku.
+```
+  DATABASES = {     
+        'default': dj_database_url.parse("<your Postrgres database URL here>")     
+    }
+```
+9. Migrate the database models to the Postgres database using the following commands in the terminal:
+`python3 manage.py migrate`
+10. Load the data fixtures
+11. Create a superuser for the Postgres database by running the following command:
+`python3 manage.py createsuperuser`
+12. Replace the database setting with the code below, so that the right database is used depending on development/deployed environment.
+```
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+```
+13. Disable collect static, so that Heroku won't try to collect static file with: `heroku config:set DISABLE_COLLECTSTATIC=1`
+14. Add `'av-glasses.herokuapp.com', 'localhost', to `ALLOWED_HOSTS` in settings.py.
+```
+ALLOWED_HOSTS = ['av-glasses.herokuapp.com', 'localhost']
+```
+15. In Stripe, add Heroku app URL a new webhook endpoint.
+16. Update the settings.py with the new Stripe environment variables and email settings.
+17. Commit all the changes to Heroku. Medial files are not connected to the app yet but the app should be working on Heroku.
+
+### Amazon Web Service S3
+The static files and media files for this deployed site
+I used CORS configuration below:
+```
+[
+  {
+      "AllowedHeaders": [
+          "Authorization"
+      ],
+      "AllowedMethods": [
+          "GET"
+      ],
+      "AllowedOrigins": [
+          "*"
+      ],
+      "ExposeHeaders": []
+  }
+]
+```
+
+- Setting for static/media files in settings.py
+1. Install `boto3` and `django-storages` with a command `pip3 install boto3` and `pip3 install django-storages` in your terminal, to connect AWS S3 bucket to Django.
+2. Add 'storages' to `INSTALLED_APPS` in settings.py.
+3. Add the following in settings.py.
+```
+if 'USE_AWS' in os.environ:
+    # Cache Control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'av-glasses'
+    AWS_S3_REGION_NAME = 'eu-west-2'
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3-eu-west-1.amazonaws.com'
+
+    # Static and media files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+```
+6. Delete DISABLE_COLLECTSTATIC from Heroku Config Var.
+7. Push all the changes to Github/Heroku and all the static files will be uploaded to S3 bucket.
+By setting up above, Heroku will run python3 manage.py collectstatic during the build process and look for static and media files.
+
+### Automatic Deploy on Heroku
+You can enable automatic deploy in the following steps that pushes update to Heroku everytime you push to github.
+1. Go to Deploy in Heroku dashboard.
+2. At `Automatic deploys`, choose a github repository you want to deploy.
+3. Click `Enable Automatic Deploys`.
 
 
-
-
-
-
+## Local Deployment
+For local deployment, you need to have an IDE (I used Gitpod for this project) and you need to install the following:
+- Git, Python3, PIP3
+Also, you need to create account in the following services if you don't own yet:
+- Stripe, AWS (S3 bucket), Gmail
 
 # Credits
 ## Content & Code
